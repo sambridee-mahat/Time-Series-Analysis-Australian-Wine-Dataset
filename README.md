@@ -95,8 +95,8 @@ Prediction Intervals
 Forecast for Jan–Dec 1994 with 80% and 95% theoretical prediction intervals was generated from hw_mult. Empirical prediction interval derived from validation errors:
 
         Percentile	        Error from Forecast
-   a.    5th	               −272 thousand litres
-   b.    5th	               +511 thousand litres
+  a.    5th	               −272 thousand litres
+  b.    5th	               +511 thousand litres
 
 This means the model’s point forecasts are typically within roughly −272 to +511 thousand litres of the true value, providing a practical sense of forecast uncertainty for inventory or logistics planning.
 Deployment Recommendation
