@@ -2,23 +2,25 @@ Exponential Smoothing on Australian Wine Dataset
 Author: Sambridee Mahat
 Date: March 2, 2026
 
-Overview
-This project applies exponential smoothing methods to forecast monthly red wine sales in Australia using the Australian Wines dataset. The dataset contains monthly sales volumes (in thousands of litres) for six wine types — Fortified, Red, Rose, Sparkling, Sweet White, and Dry White — spanning January 1980 to December 1994 (180 observations).
+Overview:
+  This project applies exponential smoothing methods to forecast monthly red wine sales in Australia using the Australian Wines dataset. The dataset contains monthly sales volumes (in thousands of litres) for six wine types — Fortified, Red, Rose, Sparkling, Sweet White, and Dry White — spanning January 1980 to December 1994 (180 observations).
 Red wine was selected for this analysis due to its clearly identifiable upward trend, strong 12-month seasonality, and multiplicative seasonal structure — making it an ideal candidate to benchmark a range of ETS (Error-Trend-Seasonality) smoothing models.
 
 Objectives
-•	 Explore and decompose the red wine time series to identify key structural patterns.
-•	 Fit and compare multiple exponential smoothing models (SES, Holt, Holt-Winters Additive/Multiplicative, Damped).
-•	 Evaluate forecast accuracy against a seasonal naïve benchmark using MASE, RMSE, MAE, MAPE, and ME.
-•	 Diagnose model residuals via the Ljung-Box test and ACF plots.
-•	 Construct empirical and theoretical prediction intervals for the best-performing model.
+  •	 Explore and decompose the red wine time series to identify key structural patterns.
+  •	 Fit and compare multiple exponential smoothing models (SES, Holt, Holt-Winters Additive/Multiplicative, Damped).
+  •	 Evaluate forecast accuracy against a seasonal naïve benchmark using MASE, RMSE, MAE, MAPE, and ME.
+  •	 Diagnose model residuals via the Ljung-Box test and ACF plots.
+  •	 Construct empirical and theoretical prediction intervals for the best-performing model.
+  
 Repository Structure
 australian-wine-forecasting/
-├── AustralianWines.csv
-├── ForecastingAnalysis.html
-└── README.md
+  ├── AustralianWines.csv
+  ├── ForecastingAnalysis.html
+  └── README.md
 
 Methodology
+
 1. Data Exploration
 The time series was visualized and decomposed to understand its structure across four complementary diagnostics.
   •	Time series plot:          confirms a clear upward trend from ~500 to ~3,500 thousand litres over 15 years.
@@ -93,17 +95,17 @@ Prediction Intervals
 Forecast for Jan–Dec 1994 with 80% and 95% theoretical prediction intervals was generated from hw_mult. Empirical prediction interval derived from validation errors:
 
         Percentile	        Error from Forecast
-   i.   5th	               −272 thousand litres
-   ii.  5th	               +511 thousand litres
+   a.    5th	               −272 thousand litres
+   b.    5th	               +511 thousand litres
 
 This means the model’s point forecasts are typically within roughly −272 to +511 thousand litres of the true value, providing a practical sense of forecast uncertainty for inventory or logistics planning.
 Deployment Recommendation
 Based on the three key deployment criteria:
 
           Criterion	                          Result	        Threshold	          Status
-   i.     MASE < 1 (beats benchmark)	        1.213	          < 1.0	            ❌ Fails
-   ii.    Ljung-Box p > 0.05 (white noise)	  0.600	          > 0.05	          ✅ Passes
-   iii.   Low mean error (bias)	              ME = 124	      < 100	            ⚠️ Notable bias
+   a.     MASE < 1 (beats benchmark)	        1.213	          < 1.0	            ❌ Fail
+   b.     Ljung-Box p > 0.05 (white noise)	  0.600	          > 0.05	          ✅ Passeed
+   c.     Low mean error (bias)	              ME = 124	      < 100	            ⚠️ Notable bias
 
 Current recommendation: Do not deploy in production. The model does not beat the seasonal naïve on the 12-month validation window, and carries a consistent positive bias (~124 thousand litres over-forecast on average).
 
